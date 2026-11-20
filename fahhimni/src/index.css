@@ -1,0 +1,152 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    @apply bg-night font-sans text-white antialiased;
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior-y: none;
+  }
+  button:focus-visible,
+  textarea:focus-visible,
+  a:focus-visible {
+    outline: 2px solid #48d6cb;
+    outline-offset: 3px;
+  }
+  ::selection {
+    background: rgba(167, 139, 250, 0.45);
+  }
+}
+
+@layer components {
+  /* زر اللعبة: سطح ملوّن فوق "قاعدة" أغمق ينضغط عند اللمس */
+  .btn {
+    @apply inline-flex select-none items-center justify-center gap-2 rounded-2xl px-6 py-3 text-base font-extrabold transition-transform duration-100;
+  }
+  .btn:active:not(:disabled) {
+    transform: translateY(4px);
+    box-shadow: none;
+  }
+  .btn:disabled {
+    @apply cursor-not-allowed opacity-45;
+  }
+  .btn-primary {
+    @apply btn bg-jred text-white;
+    box-shadow: 0 5px 0 #8a1622, 0 14px 28px -10px rgba(201, 40, 56, 0.75);
+  }
+  .btn-turq {
+    @apply btn bg-turq text-night;
+    box-shadow: 0 5px 0 #249c93, 0 14px 28px -12px rgba(72, 214, 203, 0.7);
+  }
+  .btn-ghost {
+    @apply btn border border-white/20 bg-white/10 text-white backdrop-blur;
+    box-shadow: 0 5px 0 rgba(8, 9, 30, 0.55);
+  }
+  .btn-sand {
+    @apply btn bg-sand text-ink;
+    box-shadow: 0 5px 0 #b99561;
+  }
+  .icon-btn {
+    @apply grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-white/15 bg-white/10 text-white transition-colors hover:bg-white/20;
+  }
+  .panel {
+    @apply rounded-3xl border border-white/10 bg-white/[0.06] backdrop-blur-md;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold;
+  }
+  /* شريط الشماغ: مربعات حمراء وبيضاء */
+  .shemagh {
+    background-color: #fff;
+    background-image: linear-gradient(45deg, #c92838 25%, transparent 25%, transparent 75%, #c92838 75%),
+      linear-gradient(45deg, #c92838 25%, transparent 25%, transparent 75%, #c92838 75%);
+    background-size: 10px 10px;
+    background-position: 0 0, 5px 5px;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .thin-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(167, 139, 250, 0.5) transparent;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(-14px, 12px) rotate(4deg);
+  }
+}
+@keyframes typing {
+  0%,
+  80%,
+  100% {
+    opacity: 0.25;
+    transform: translateY(0);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+.animate-twinkle {
+  animation: twinkle 3.5s ease-in-out infinite;
+}
+.animate-floaty {
+  animation: floaty 5s ease-in-out infinite;
+}
+.animate-drift {
+  animation: drift 16s ease-in-out infinite;
+}
+.typing-dot {
+  animation: typing 1.2s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
